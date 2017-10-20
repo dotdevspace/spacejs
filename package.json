@@ -1,0 +1,15 @@
+{
+  "name": "spacejs",
+  "version": "0.0.1",
+  "description": "SpaceJS by .dev SPACE",
+  "author": ".dev SPACE",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:dotdevspace/spacejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dotdevspace/spacejs/issues"
+  },
+  "dependencies": {}
+}
