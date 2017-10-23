@@ -65,6 +65,23 @@ class $SpaceIO extends $SpaceJS {
         this.$config.debug = $debug;
     }
 
+    private _on($on: string = '', $function) {
+        this.$_io.on(`${this.getNamespace()}${$on}`, function ($socket) {
+            $function($socket);
+        });
+
+        return this;
+    }
+
+    public on: object = {
+        me($on, $function) {
+            return this._on(` ${$on}`, $function);
+        },
+        room($on, $function) {
+            return this._on(` ${this.getJoinId()} ${$on}`, $function);
+        }
+    }
+
 }
 
 let SpaceJS = new $SpaceJS();

@@ -33,6 +33,14 @@ var $SpaceIO = (function (_super) {
             join: 'global'
         };
         _this.$_io = null;
+        _this.on = {
+            me: function ($on, $function) {
+                return this._on(" " + $on, $function);
+            },
+            room: function ($on, $function) {
+                return this._on(" " + this.getJoinId() + " " + $on, $function);
+            }
+        };
         if (typeof io !== 'undefined') {
             _this.$config = Object.assign(_this.$config, $params);
             _this.$_io = io.connect(_this.$config.host + ":" + _this.$config.port);
@@ -66,6 +74,13 @@ var $SpaceIO = (function (_super) {
     };
     $SpaceIO.prototype.setDebug = function ($debug) {
         this.$config.debug = $debug;
+    };
+    $SpaceIO.prototype._on = function ($on, $function) {
+        if ($on === void 0) { $on = ''; }
+        this.$_io.on("" + this.getNamespace() + $on, function ($socket) {
+            $function($socket);
+        });
+        return this;
     };
     return $SpaceIO;
 }($SpaceJS));
