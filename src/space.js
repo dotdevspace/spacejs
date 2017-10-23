@@ -42,6 +42,12 @@ var $SpaceIO = (function (_super) {
         }
         return _this;
     }
+    $SpaceIO.prototype.getNamespace = function () {
+        return this.$config.namespace;
+    };
+    $SpaceIO.prototype.setNamespace = function ($namespace) {
+        this.$config.namespace = $namespace;
+    };
     return $SpaceIO;
 }($SpaceJS));
 var SpaceJS = new $SpaceJS();
