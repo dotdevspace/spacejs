@@ -36,6 +36,8 @@ var $SpaceIO = (function (_super) {
         if (typeof io !== 'undefined') {
             _this.$config = Object.assign(_this.$config, $params);
             _this.$_io = io.connect(_this.$config.host + ":" + _this.$config.port);
+            _this.setDebug(_this.$config.debug);
+            _this.setJoinId(_this.$config.join);
         }
         else {
             _this.error('Socket.io is not defined, require socket.io-client. Download https://cdnjs.com/libraries/socket.io');
@@ -59,6 +61,9 @@ var $SpaceIO = (function (_super) {
     $SpaceIO.prototype.setJoinId = function ($join) {
         this.$config.join = $join;
         this.debug("Join " + this.getJoinId());
+    };
+    $SpaceIO.prototype.setDebug = function ($debug) {
+        this.$config.debug = $debug;
     };
     return $SpaceIO;
 }($SpaceJS));

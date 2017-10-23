@@ -28,6 +28,9 @@ class $SpaceIO extends $SpaceJS {
             this.$config = (<any>Object).assign(this.$config, $params);
 
             this.$_io = io.connect(`${this.$config.host}:${this.$config.port}`);
+
+            this.setDebug(this.$config.debug);
+            this.setJoinId(this.$config.join);
         } else {
             this.error('Socket.io is not defined, require socket.io-client. Download https://cdnjs.com/libraries/socket.io');
         }
@@ -54,6 +57,10 @@ class $SpaceIO extends $SpaceJS {
     public setJoinId($join: string) {
         this.$config.join = $join;
         this.debug(`Join ${this.getJoinId()}`);
+    }
+
+    private setDebug($debug: boolean) {
+        this.$config.debug = $debug;
     }
 
 }
