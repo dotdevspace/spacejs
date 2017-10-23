@@ -25,22 +25,23 @@ var $SpaceIO = (function (_super) {
     function $SpaceIO($params) {
         if ($params === void 0) { $params = {}; }
         var _this = _super.call(this) || this;
-        _this.$default = {
+        _this.$config = {
             host: 'localhost',
-            port: 3000
+            port: 3000,
+            namespace: '.devSPACE',
+            debug: false,
+            join: 'global'
         };
-        _this.$config = {};
+        _this.$_io = null;
         if (typeof io !== 'undefined') {
-            _this.$config = Object.assign(_this.$default, $params);
+            _this.$config = Object.assign(_this.$config, $params);
+            _this.$_io = io.connect(_this.$config.host + ":" + _this.$config.port);
         }
         else {
-            _this.error('Socket.io is not defined');
+            _this.error('Socket.io is not defined, require socket.io-client. Download https://cdnjs.com/libraries/socket.io');
         }
         return _this;
     }
-    $SpaceIO.prototype.hello = function () {
-        console.info(this.$config);
-    };
     return $SpaceIO;
 }($SpaceJS));
 var SpaceJS = new $SpaceJS();
