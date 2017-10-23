@@ -37,6 +37,7 @@ var $SpaceIO = (function (_super) {
             _this.$config = Object.assign(_this.$config, $params);
             _this.$_io = io.connect(_this.$config.host + ":" + _this.$config.port);
             _this.setDebug(_this.$config.debug);
+            _this.setNamespace(_this.$config.namespace);
             _this.setJoinId(_this.$config.join);
         }
         else {
@@ -54,6 +55,7 @@ var $SpaceIO = (function (_super) {
     };
     $SpaceIO.prototype.setNamespace = function ($namespace) {
         this.$config.namespace = $namespace;
+        this.debug("Namespace is change to " + this.getNamespace());
     };
     $SpaceIO.prototype.getJoinId = function () {
         this.$config.join;
