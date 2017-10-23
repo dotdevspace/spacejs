@@ -30,6 +30,7 @@ class $SpaceIO extends $SpaceJS {
             this.$_io = io.connect(`${this.$config.host}:${this.$config.port}`);
 
             this.setDebug(this.$config.debug);
+            this.setNamespace(this.$config.namespace);
             this.setJoinId(this.$config.join);
         } else {
             this.error('Socket.io is not defined, require socket.io-client. Download https://cdnjs.com/libraries/socket.io');
@@ -48,6 +49,7 @@ class $SpaceIO extends $SpaceJS {
 
     public setNamespace($namespace: string) {
         this.$config.namespace = $namespace;
+        this.debug(`Namespace is change to ${this.getNamespace()}`);
     }
 
     public getJoinId() {
