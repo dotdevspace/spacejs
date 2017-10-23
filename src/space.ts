@@ -1,9 +1,17 @@
-import $SpaceIO from './space.io'
+class $SpaceIO {
+    constructor($params: object) {
 
-class SpaceJS {
+    }
+
+
+}
+
+class $SpaceJS {
 
     public $io($config: object) {
         return new $SpaceIO($config)
     }
 
 }
+
+let SpaceJS = new $SpaceJS();
