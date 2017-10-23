@@ -33,12 +33,27 @@ class $SpaceIO extends $SpaceJS {
         }
     }
 
+    private debug($description) {
+        if (this.$config.debug) {
+            console.info(`SpaceJS » ${$description}`);
+        }
+    }
+
     public getNamespace() {
         return this.$config.namespace;
     }
 
     public setNamespace($namespace: string) {
         this.$config.namespace = $namespace;
+    }
+
+    public getJoinId() {
+        this.$config.join;
+    }
+
+    public setJoinId($join: string) {
+        this.$config.join = $join;
+        this.debug(`Join ${this.getJoinId()}`);
     }
 
 }

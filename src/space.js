@@ -42,11 +42,23 @@ var $SpaceIO = (function (_super) {
         }
         return _this;
     }
+    $SpaceIO.prototype.debug = function ($description) {
+        if (this.$config.debug) {
+            console.info("SpaceJS \u00BB " + $description);
+        }
+    };
     $SpaceIO.prototype.getNamespace = function () {
         return this.$config.namespace;
     };
     $SpaceIO.prototype.setNamespace = function ($namespace) {
         this.$config.namespace = $namespace;
+    };
+    $SpaceIO.prototype.getJoinId = function () {
+        this.$config.join;
+    };
+    $SpaceIO.prototype.setJoinId = function ($join) {
+        this.$config.join = $join;
+        this.debug("Join " + this.getJoinId());
     };
     return $SpaceIO;
 }($SpaceJS));
