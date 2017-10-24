@@ -53,7 +53,7 @@ class $SpaceIO extends $SpaceJS {
     }
 
     public getJoinId() {
-        this.$config.join;
+        return this.$config.join;
     }
 
     public setJoinId($join: string) {
@@ -66,6 +66,8 @@ class $SpaceIO extends $SpaceJS {
     }
 
     private _on($where: string = '', $function) {
+        this.debug(`ON Active for [${$where}]`);
+
         this.$_io.on(`${this.getNamespace()} ${$where}`, function ($socket) {
             $function($socket);
         });
@@ -74,12 +76,14 @@ class $SpaceIO extends $SpaceJS {
     }
 
     public room() {
+        const $this = this;
+
         return {
             emit($where, $data) {
-                return this._emit(`room`, `${this.getJoinId()} ${$where}`, $data);
+                return $this._emit(`room`, `${$this.getJoinId()} ${$where}`, $data);
             },
             on($where, $function) {
-                return this._on(`${this.getJoinId()} ${$where}`, $function);
+                return $this._on(`${$this.getJoinId()} ${$where}`, $function);
             }
         };
     }
@@ -96,12 +100,14 @@ class $SpaceIO extends $SpaceJS {
     }
 
     public me() {
+        const $this = this;
+
         return {
             on($where, $function) {
-                return this._on($where, $function);
+                return $this._on($where, $function);
             },
             emit($where, $data) {
-                return this._emit(`me`, $where, $data);
+                return $this._emit(`me`, $where, $data);
             }
         };
     }

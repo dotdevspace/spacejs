@@ -57,7 +57,7 @@ var $SpaceIO = /** @class */ (function (_super) {
         this.debug("Namespace is change to " + this.getNamespace());
     };
     $SpaceIO.prototype.getJoinId = function () {
-        this.$config.join;
+        return this.$config.join;
     };
     $SpaceIO.prototype.setJoinId = function ($join) {
         this.$config.join = $join;
@@ -68,18 +68,20 @@ var $SpaceIO = /** @class */ (function (_super) {
     };
     $SpaceIO.prototype._on = function ($where, $function) {
         if ($where === void 0) { $where = ''; }
+        this.debug("ON Active for [" + $where + "]");
         this.$_io.on(this.getNamespace() + " " + $where, function ($socket) {
             $function($socket);
         });
         return this;
     };
     $SpaceIO.prototype.room = function () {
+        var $this = this;
         return {
             emit: function ($where, $data) {
-                return this._emit("room", this.getJoinId() + " " + $where, $data);
+                return $this._emit("room", $this.getJoinId() + " " + $where, $data);
             },
             on: function ($where, $function) {
-                return this._on(this.getJoinId() + " " + $where, $function);
+                return $this._on($this.getJoinId() + " " + $where, $function);
             }
         };
     };
