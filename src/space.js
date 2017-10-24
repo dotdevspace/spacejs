@@ -33,20 +33,20 @@ var $SpaceIO = (function (_super) {
             join: 'global'
         };
         _this.$_io = null;
-        _this.on = {
-            me: function ($where, $function) {
-                return this._on($where, $function);
+        _this.room = {
+            emit: function ($where, $data) {
+                return this._emit("room", this.getJoinId() + " " + $where, $data);
             },
-            room: function ($where, $function) {
+            on: function ($where, $function) {
                 return this._on(this.getJoinId() + " " + $where, $function);
             }
         };
-        _this.emit = {
-            me: function ($where, $data) {
-                return this._emit("me", $where, $data);
+        _this.me = {
+            on: function ($where, $function) {
+                return this._on($where, $function);
             },
-            room: function ($where, $data) {
-                return this._emit("room", this.getJoinId() + " " + $where, $data);
+            emit: function ($where, $data) {
+                return this._emit("me", $where, $data);
             }
         };
         if (typeof io !== 'undefined') {

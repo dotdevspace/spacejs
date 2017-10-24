@@ -73,11 +73,11 @@ class $SpaceIO extends $SpaceJS {
         return this;
     }
 
-    public on: object = {
-        me($where, $function) {
-            return this._on($where, $function);
+    public room: object = {
+        emit($where, $data) {
+            return this._emit(`room`, `${this.getJoinId()} ${$where}`, $data);
         },
-        room($where, $function) {
+        on($where, $function) {
             return this._on(`${this.getJoinId()} ${$where}`, $function);
         }
     }
@@ -93,12 +93,12 @@ class $SpaceIO extends $SpaceJS {
         return this;
     }
 
-    public emit: object = {
-        me($where, $data) {
-            return this._emit(`me`, $where, $data);
+    public me: object = {
+        on($where, $function) {
+            return this._on($where, $function);
         },
-        room($where, $data) {
-            return this._emit(`room`, `${this.getJoinId()} ${$where}`, $data);
+        emit($where, $data) {
+            return this._emit(`me`, $where, $data);
         }
     }
 
