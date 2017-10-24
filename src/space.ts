@@ -73,13 +73,15 @@ class $SpaceIO extends $SpaceJS {
         return this;
     }
 
-    public room: object = {
-        emit($where, $data) {
-            return this._emit(`room`, `${this.getJoinId()} ${$where}`, $data);
-        },
-        on($where, $function) {
-            return this._on(`${this.getJoinId()} ${$where}`, $function);
-        }
+    public room() {
+        return {
+            emit($where, $data) {
+                return this._emit(`room`, `${this.getJoinId()} ${$where}`, $data);
+            },
+            on($where, $function) {
+                return this._on(`${this.getJoinId()} ${$where}`, $function);
+            }
+        };
     }
 
     private _emit($namepaceEmit, $where: string = '', $data: object) {
@@ -93,13 +95,15 @@ class $SpaceIO extends $SpaceJS {
         return this;
     }
 
-    public me: object = {
-        on($where, $function) {
-            return this._on($where, $function);
-        },
-        emit($where, $data) {
-            return this._emit(`me`, $where, $data);
-        }
+    public me() {
+        return {
+            on($where, $function) {
+                return this._on($where, $function);
+            },
+            emit($where, $data) {
+                return this._emit(`me`, $where, $data);
+            }
+        };
     }
 
 }

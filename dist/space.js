@@ -32,22 +32,6 @@ var $SpaceIO = /** @class */ (function (_super) {
             join: 'global'
         };
         _this.$_io = null;
-        _this.room = {
-            emit: function ($where, $data) {
-                return this._emit("room", this.getJoinId() + " " + $where, $data);
-            },
-            on: function ($where, $function) {
-                return this._on(this.getJoinId() + " " + $where, $function);
-            }
-        };
-        _this.me = {
-            on: function ($where, $function) {
-                return this._on($where, $function);
-            },
-            emit: function ($where, $data) {
-                return this._emit("me", $where, $data);
-            }
-        };
         if (typeof io !== 'undefined') {
             _this.$config = Object.assign(_this.$config, $params);
             _this.$_io = io.connect(_this.$config.host + ":" + _this.$config.port);
@@ -89,6 +73,16 @@ var $SpaceIO = /** @class */ (function (_super) {
         });
         return this;
     };
+    $SpaceIO.prototype.room = function () {
+        return {
+            emit: function ($where, $data) {
+                return this._emit("room", this.getJoinId() + " " + $where, $data);
+            },
+            on: function ($where, $function) {
+                return this._on(this.getJoinId() + " " + $where, $function);
+            }
+        };
+    };
     $SpaceIO.prototype._emit = function ($namepaceEmit, $where, $data) {
         if ($where === void 0) { $where = ''; }
         var $dataEmit = {
@@ -97,6 +91,16 @@ var $SpaceIO = /** @class */ (function (_super) {
         };
         this.$_io.emit(this.getNamespace() + " " + $namepaceEmit, $dataEmit);
         return this;
+    };
+    $SpaceIO.prototype.me = function () {
+        return {
+            on: function ($where, $function) {
+                return this._on($where, $function);
+            },
+            emit: function ($where, $data) {
+                return this._emit("me", $where, $data);
+            }
+        };
     };
     return $SpaceIO;
 }($SpaceJS));
