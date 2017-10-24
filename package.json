@@ -12,7 +12,9 @@
     "url": "https://github.com/dotdevspace/spacejs/issues"
   },
   "scripts": {
-    "build": "webpack --progress --hide-modules"
+    "build": "webpack --progress --hide-modules",
+    "dist": "tsc src/space.ts --outDir dist",
+    "minify": "uglifyjs dist/space.js --compress --source-map -o dist/spacejs.min.js"
   },
   "dependencies": {
     "extend": "^3.0.1",

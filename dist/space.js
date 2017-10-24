@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -9,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var $SpaceJS = (function () {
+var $SpaceJS = /** @class */ (function () {
     function $SpaceJS() {
     }
     $SpaceJS.prototype.$io = function ($config) {
@@ -20,7 +19,7 @@ var $SpaceJS = (function () {
     };
     return $SpaceJS;
 }());
-var $SpaceIO = (function (_super) {
+var $SpaceIO = /** @class */ (function (_super) {
     __extends($SpaceIO, _super);
     function $SpaceIO($params) {
         if ($params === void 0) { $params = {}; }
