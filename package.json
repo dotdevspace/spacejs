@@ -1,9 +1,9 @@
 {
-  "name": "@dotdevspace/spacejs",
+  "name": "dotdevspace-spacejs",
   "version": "0.0.1",
   "description": "SpaceJS by .dev SPACE",
   "author": ".dev SPACE",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+git@github.com:dotdevspace/spacejs.git"
