@@ -95,12 +95,13 @@ var $SpaceIO = /** @class */ (function (_super) {
         return this;
     };
     $SpaceIO.prototype.me = function () {
+        var $this = this;
         return {
             on: function ($where, $function) {
-                return this._on($where, $function);
+                return $this._on($where, $function);
             },
             emit: function ($where, $data) {
-                return this._emit("me", $where, $data);
+                return $this._emit("me", $where, $data);
             }
         };
     };
