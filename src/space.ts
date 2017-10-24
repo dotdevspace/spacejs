@@ -65,8 +65,8 @@ class $SpaceIO extends $SpaceJS {
         this.$config.debug = $debug;
     }
 
-    private _on($on: string = '', $function) {
-        this.$_io.on(`${this.getNamespace()}${$on}`, function ($socket) {
+    private _on($where: string = '', $function) {
+        this.$_io.on(`${this.getNamespace()} ${$where}`, function ($socket) {
             $function($socket);
         });
 
@@ -74,11 +74,31 @@ class $SpaceIO extends $SpaceJS {
     }
 
     public on: object = {
-        me($on, $function) {
-            return this._on(` ${$on}`, $function);
+        me($where, $function) {
+            return this._on($where, $function);
         },
-        room($on, $function) {
-            return this._on(` ${this.getJoinId()} ${$on}`, $function);
+        room($where, $function) {
+            return this._on(`${this.getJoinId()} ${$where}`, $function);
+        }
+    }
+
+    private _emit($namepaceEmit, $where: string = '', $data: object) {
+        const $dataEmit = {
+            namespace: `${this.getNamespace()} ${$where}`,
+            data: $data
+        };
+
+        this.$_io.emit(`${this.getNamespace()} ${$namepaceEmit}`, $dataEmit);
+
+        return this;
+    }
+
+    public emit: object = {
+        me($where, $data) {
+            return this._emit(`me`, $where, $data);
+        },
+        room($where, $data) {
+            return this._emit(`room`, `${this.getJoinId()} ${$where}`, $data);
         }
     }
 

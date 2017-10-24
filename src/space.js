@@ -34,11 +34,19 @@ var $SpaceIO = (function (_super) {
         };
         _this.$_io = null;
         _this.on = {
-            me: function ($on, $function) {
-                return this._on(" " + $on, $function);
+            me: function ($where, $function) {
+                return this._on($where, $function);
             },
-            room: function ($on, $function) {
-                return this._on(" " + this.getJoinId() + " " + $on, $function);
+            room: function ($where, $function) {
+                return this._on(this.getJoinId() + " " + $where, $function);
+            }
+        };
+        _this.emit = {
+            me: function ($where, $data) {
+                return this._emit("me", $where, $data);
+            },
+            room: function ($where, $data) {
+                return this._emit("room", this.getJoinId() + " " + $where, $data);
             }
         };
         if (typeof io !== 'undefined') {
@@ -75,11 +83,20 @@ var $SpaceIO = (function (_super) {
     $SpaceIO.prototype.setDebug = function ($debug) {
         this.$config.debug = $debug;
     };
-    $SpaceIO.prototype._on = function ($on, $function) {
-        if ($on === void 0) { $on = ''; }
-        this.$_io.on("" + this.getNamespace() + $on, function ($socket) {
+    $SpaceIO.prototype._on = function ($where, $function) {
+        if ($where === void 0) { $where = ''; }
+        this.$_io.on(this.getNamespace() + " " + $where, function ($socket) {
             $function($socket);
         });
+        return this;
+    };
+    $SpaceIO.prototype._emit = function ($namepaceEmit, $where, $data) {
+        if ($where === void 0) { $where = ''; }
+        var $dataEmit = {
+            namespace: this.getNamespace() + " " + $where,
+            data: $data
+        };
+        this.$_io.emit(this.getNamespace() + " " + $namepaceEmit, $dataEmit);
         return this;
     };
     return $SpaceIO;
